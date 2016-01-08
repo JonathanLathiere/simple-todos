@@ -78,6 +78,7 @@ Meteor.methods({
       // If the task is private, make sure only the owner can delete it
       throw new Meteor.Error("not-authorized");
     }
+    Tasks.remove(taskId);
   },
   setChecked: function (taskId, setChecked) {
     var task = Tasks.findOne(taskId);
@@ -85,7 +86,6 @@ Meteor.methods({
       // If the task is private, make sure only the owner can check it off
       throw new Meteor.Error("not-authorized");
     }
-
     Tasks.update(taskId, { $set: { checked: setChecked} });
   },
   setPrivate: function (taskId, setToPrivate) {
